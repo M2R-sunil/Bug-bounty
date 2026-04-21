@@ -5,61 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cybersecurity Portfolio</title>
     <style>
-      
+        /* CSS Reset aur Basic Setup */
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
-            background-color: #121212;
+            background-color: #0a0a0a; /* Deep dark background */
             color: #e0e0e0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace; /* Hacker style font */
             margin: 0;
-            padding: 50px 20px;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
+            align-items: center;
             justify-content: center;
+            overflow-x: hidden; /* X-axis scroll hatane ke liye */
         }
+
         .container {
-            max-width: 800px; /* Slightly larger container for the big eagle */
+            max-width: 900px;
             width: 100%;
+            background: rgba(15, 25, 20, 0.8);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            border-radius: 12px;
+            padding: 40px 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.05);
+            text-align: center;
         }
-  
+
+        /* Eagle Art Formatting */
+        .eagle-wrapper {
+            width: 100%;
+            overflow-x: auto; /* Choti screen par art ko safe rakhne ke liye */
+            scrollbar-width: thin;
+            scrollbar-color: #00ffcc #121212;
+            margin-bottom: 30px;
+        }
+
         pre.hero-eagle {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
+            /* Screen ke hisaab se size auto-adjust hogi */
+            font-size: clamp(3px, 0.75vw, 8px); 
             line-height: 1.1; 
-            color: #ffffff;
+            color: #00ffcc; /* Cyber Cyan color */
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.4); /* Subtle glow effect */
             width: fit-content;
-            margin: 0 auto 50px auto; 
+            margin: 0 auto; 
             font-weight: bold; 
             white-space: pre; 
         }
+
+        /* Typography */
         h1 {
-            text-align: center;
             font-weight: 600;
             margin-bottom: 20px;
             color: #ffffff;
-            font-size: 28px;
+            font-size: clamp(20px, 3vw, 28px);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .highlight {
+            color: #00ffcc;
+        }
+
+        p {
+            font-size: clamp(14px, 1.5vw, 16px);
+            line-height: 1.8;
+            color: #b3b3b3;
+            margin: 0 auto 20px auto;
+            max-width: 700px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(0, 255, 204, 0.2);
+            font-size: 13px;
+            color: #555555;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
-        p {
-            font-size: 16px;
-            line-height: 1.8;
-            text-align: center;
-            color: #cccccc;
-            margin-bottom: 20px;
+
+        /* Custom Scrollbar for Eagle Wrapper */
+        .eagle-wrapper::-webkit-scrollbar {
+            height: 4px;
         }
-        .footer {
-            margin-top: 60px;
-            text-align: center;
-            font-size: 14px;
-            color: #777777;
+        .eagle-wrapper::-webkit-scrollbar-track {
+            background: #121212; 
         }
-        
-        
-        @media (max-width: 800px) {
-            pre.hero-eagle { font-size: 10px; margin-bottom: 40px; }
-        }
-        @media (max-width: 600px) {
-            pre.hero-eagle { font-size: 8px; margin-bottom: 30px; }
-            h1 { font-size: 24px; }
-            p { font-size: 15px; text-align: left; }
+        .eagle-wrapper::-webkit-scrollbar-thumb {
+            background: #00ffcc; 
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -67,8 +104,9 @@
 
     <div class="container">
         
+        <div class="eagle-wrapper">
 <pre class="hero-eagle">
-         ...',;:cllooodddxdxxxxxxxxxxxxxxxdddollc:;,'...                                        
+                                            ...',;:cllooodddxdxxxxxxxxxxxxxxxdddollc:;,'...                                        
                                         .',:codxO0KX8@#####################################@@8XK0Oxol:,..                                        
                                      ..;ldk0X8@##########################################################@X0koc,.                                    
                                   'cx08@########################################################################8Kx:.                                 
@@ -145,10 +183,11 @@
                                                          .c0@########@l         ;X##########Xd'                                                      
                                                            .cO8######O.        .d##########kc.                                                       
                                                                ,oOX@K,       .,k#@8Kkl'                                                          
-                                                                  .,,.        .,c;'.
+                                                                  .,,.        .,c;'.                                                              
 </pre>
-
+        </div>
         
+        <h1><span class="highlight">SysAdmin</span> & Security Researcher</h1>
         <p>
             I am a dedicated cybersecurity researcher and ethical hacker. My mission is to help organizations protect their infrastructure from data breaches and secure their critical assets against advanced persistent threats. I look at systems not just for how they work, but for how they can be broken—and more importantly, how they can be fortified.
         </p>
@@ -157,7 +196,7 @@
         </p>
 
         <div class="footer">
-            <p>Securing the cyberspace, one packet at a time.</p>
+            <p>> Securing the cyberspace, one packet at a time_</p>
         </div>
     </div>
 
