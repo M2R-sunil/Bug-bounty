@@ -11,16 +11,16 @@
         }
         
         body {
-            background-color: #0a0a0a; /* Deep dark background */
+            background-color: #0a0a0a;
             color: #e0e0e0;
-            font-family: 'Courier New', Courier, monospace; /* Hacker style font */
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
             padding: 20px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden; /* X-axis scroll hatane ke liye */
+            overflow-x: hidden;
         }
 
         .container {
@@ -37,22 +37,20 @@
         /* Eagle Art Formatting */
         .eagle-wrapper {
             width: 100%;
-            overflow-x: auto; /* Choti screen par art ko safe rakhne ke liye */
-            scrollbar-width: thin;
-            scrollbar-color: #00ffcc #121212;
-            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
         pre.hero-eagle {
-            /* Screen ke hisaab se size auto-adjust hogi */
-            font-size: clamp(3px, 0.75vw, 8px); 
+            /* Default choti size PC ke liye */
+            font-size: 6.5px; 
             line-height: 1.1; 
-            color: #00ffcc; /* Cyber Cyan color */
-            text-shadow: 0 0 5px rgba(0, 255, 204, 0.4); /* Subtle glow effect */
-            width: fit-content;
-            margin: 0 auto; 
+            color: #00ffcc;
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.4);
             font-weight: bold; 
             white-space: pre; 
+            margin: 0;
         }
 
         /* Typography */
@@ -87,16 +85,15 @@
             letter-spacing: 1px;
         }
 
-        /* Custom Scrollbar for Eagle Wrapper */
-        .eagle-wrapper::-webkit-scrollbar {
-            height: 4px;
+        /* Screen ke hisaab se ASCII aur chota karne ke liye */
+        @media (max-width: 800px) {
+            pre.hero-eagle { font-size: 5px; }
         }
-        .eagle-wrapper::-webkit-scrollbar-track {
-            background: #121212; 
+        @media (max-width: 600px) {
+            pre.hero-eagle { font-size: 3.5px; }
         }
-        .eagle-wrapper::-webkit-scrollbar-thumb {
-            background: #00ffcc; 
-            border-radius: 10px;
+        @media (max-width: 450px) {
+            pre.hero-eagle { font-size: 2.5px; }
         }
     </style>
 </head>
@@ -105,86 +102,85 @@
     <div class="container">
         
         <div class="eagle-wrapper">
-<pre class="hero-eagle">                                                     ...',;:cllooodddxdxxxxxxxxxxxxxxxdddollc:;,'...                                                  
-                                            .',:codxO0KXNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWWNXK0Oxol:,..                                         
-                                     ..;ldk0XNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWX0koc,.                                    
-                                  'cx0NWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNKx:.                                 
-                               'oONMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWXd,                               
-                             'xNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNx'                             
-                           .cXMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK:                            
-                          .dNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXc                           
-                         .dWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK;                          
-                         oNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO.                         
-                        ;XMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWl                         
-                       .xMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMk.                        
-                       :XMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMX;                        
-                      .dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWWNNNNWWMMMMMMMMMMMMMMMMWl                        
-                      '0MMMMMMMMMMMMMMWNXKK000KKXWWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNKkdlc:,'''''',:cokXWMMMMMMMMMMMx.                       
-                      :NMMMMMMMMMWXOoc;'.........';:lok0NWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWXOo:'.                 .:kNMMMMMMMMM0'                       
-                      oMMMMMMMMNOc'.,coddddlc;..       .';oOXWMMMMMMMMMMMMMMMMMMMMMMMMXx:.       .,:odkO00OOkdo:,..,kWMMMMMMMX;                       
-                     .kMMMMMMW0:.,dKWMMMMWXXNNX0ko:'.       .cONMMMMMMMMMMMMMMMMMMMMKo.       .:x0KOdocc::oKMMMMWKkol0WMMMMMMWc                       
-                     ,KMMMMMWx;cONMMMMMMMNkl;,,:lxOK0x:.       ;OWMMMMMMMMMMMMMMMMWx.      .;xXXkc'...,:ld0WMMMMMMMMWWMMMMMMMMo                       
-                     cNMMMMMNOKWMMMMMMMMMMMWKxc,. ..:xKKx,      .xWMMMMMMMMMMMMMMWx.     .cONXd,.'cx0XWMMMMMMMMMMMMMMMMMMMMMMMx.                      
-                     dMMMMMMMMMMMMMMMMMMMMMMMMMW0x:.  .:x0x,     ,KMMMMMMMMMMMMMMWc    .lKN0l'.:kNMMMMMMMMMMMMMMMMMMMMMMMMMMMMO.                      
-                    .OMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXkc.  'lkx:.  ,KMMMMMMMMMMMMMMMk,':dXNk:.'oKWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK,                      
-                    ,KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXx,  .:k0kd0WMMMMMMMMMMMMMMMWNNWNx,.'dXMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN:                      
-                    :NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNx'   ;OWMMMMMMMMMMMMMMMMMMMNx,.,xNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWc                      
-                    oWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXl.  .lXMMMMMMMMMMMMMMMMMK:.,xNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo                      
-                   .xMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNd.   :KMMMMMMMMMMMMMMM0,'xNMMMMMMMMMMMWX0OkkkkO0KNWMMMMMMMMMMMMMMMMx.                     
-                   .kMMMMMMMMMMMMMMWKOdlc::;:::cldk0NWMMMMMMWd.   :XMMMMMMMMMMMMMM0o0MMMMMMMMWKxl:,..      ..';cd0WMMMMMMMMMMMMk.                     
-                   .OMMMMMMMMMMMNOl,.              ..:o0NMMMMX:   .xMMMMMMMMMMMMMMMMMMMMMMNOl,.                  .;xNMMMMMMMMMMO.                     
-                   .OMMMMMMMMMNx,                      .,dXMMMx.   cNMMMMMMMMMMMMMMMMMMMNx,                         ,xNMMMMMMMMO'                     
-                   '0MMMMMWKko'                           ,0MM0'   ,KMMMMMMMMMMMMMMMMMMX:                             'lkXWMMMM0'                     
-                   '0MMMMWO,                             .;0MMK;   '0MMMMMMMMMMMMMMMMMMNOo:'....    .......'',;:cclodddxkKWMMMM0'                     
-                   '0MMMMMWo       .....''',,,;;:::cclodkKWMMMX;   .OMMMMMMMMMMMMMMMMMMMMMMWXK0000O000KKKXXNWWMMMMMMMMMMMMMMMMM0'                     
-                   .kMMMMM0:';codk0KKXXNNWWWWWMMMMMMMMMMMMMMMMX;   .OMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO.                     
-                    dMMMMMXKNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0'   .OMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMk.                     
-                    cWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMk.   .kMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMx.                     
-                    '0MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd    .kMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWo                      
-                     oWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN:    .kMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMX;                      
-                     .OMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO.    .kMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMx.                      
-                      ;XMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWl     .OMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK;                       
-                       :KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMk.     '0MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMX:                        
-                      ..;0WMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0,      ,KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0;                         
-                     ,Ok,.oXMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNx'       ;XMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNk,                          
-                     .kMXc..lkNMMMMMMMMMMMMMMMMMMMMMMMNkl'         cWMMMMMMMMMMMMMMMNkdONMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKdoOo.                         
-                      :XMNl   .:oxOKXXXXXXXKK0OOkOXMNx'     .      dMMMMMMMMMMMMMMMMWKkxdOWMMMMMMMWNWWWWMMMMMMWWWNK0xl;.;0Mk.                         
-                       dWMNl  .c.  .,oxkkOOOOOO00KNMk.    :O0l.   'OMMMMMMMMMMMMMMMMMMMMXx0MMMMMMWKdlc::::::;;,,'.''   ;KMMd                          
-                       .kMMNc ,K0;  '0MMMMMMMMMMMMMMk.   :NMM0'   :NMMMMMMMMMMMMMMMMMMMMMNNMMMMMMMMWXK0OOOkx:    ,Ok. ;KMMK,                          
-                        ,KMMX:.xMK;  :KMMMMMMMMMMMMMNl  .kMMMx.  .xMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK;  .lXMk.,KMMWo                           
-                         :XMMX::KMK;  ,kWMMMMMMMMMMMMNk:oXMMN:   ,KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0;  .dNMNc,0MMWk.                           
-                          lNMMXllXM0,  .:ONMMMMMMMMMMMMWWMMMXc   lWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNd.  .kWMWd:OMMM0,                            
-                          .dWMMNdlKM0,    ,dKWMMMMMMMMMMMMMMMXk, oMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNx,   ,0WMNd;OMMMK;                             
-                           .xWMMNxc0MK:     .:d0NMMMMMMMMMMMMMWd .xXWMMMMMMMMWXxclkNMMMMMMMMMMMMMMMWXx,    cXMMXl,kWMMXc                              
-                            .kWMMWx;xNNd.      .,cdOKNWMMMMMWXd.   .:oxO0K00kl.    ;OWMMMMMMMMMMNKxc.    .xNMWO,'kWMMNc                               
-                             .kWMMWk,:0WKl.         .',:ccc:;.        .;c,.         .cOXNNNKOxo:'.     .:0WWKl..kWMMNl                                
-                              .OMMMWO'.lXWKd;.                      .l0NWO,.           .''..          ;OWMXd. .kWMMXc                                 
-                               'OMMMM0, .dXMWKxc,.                 ,0WMMMMX0o.                     'cONMXx'  'OWMMX:                                  
-                                'OMMMMK;  'dXMMMWKxl:'.          .oXMMMMMMMMWO,               .,cdONMMMWKd'.:KMMMK;                                   
-                                 'OMMMMK;   .l0WMMMMWNKOxoc:;;;cdKWWXXXXKKKKKKk;      ..';coxOXWMMMMMMMMNl.oNMMM0,                                    
-                                  'OMMMMX:    .:ONMMMMMMMMMMMMMMMMMNK0OkxdddddddodxkO0KXWMMMMMMMMMMMMMMXc'xWMMWk.                                     
-                                   'OWMMMXl      ,xXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK:;0WMMNd.                                      
-                                    .kWMMMNo.     .cdOXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWO;cXMMMXl.                                       
-                                     .dNMMMWx.    dNK0KNNNNNWWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWk:dNMMMK;                                         
-                                      .oNMMMWx.   dMMMMMWNXXKK0kdllllllllcccclkXMMMMMMMMMMMMMMMMMMNxcOWMMWO'                                          
-                                        lNMMMWx.  oWMMMMMMMMMMWN0d,           .oNMMMMMMMMMMMMMMMMNxdKMMMNd.                                           
-                                         lNMMMWx. cWMMMMMMMMMMMMMMNc         .dNMMMMMMMMMMMMMMMMXkkNMMMXl.                                            
-                                          lNMMMWk.:NMMMMMMMMMMMMMMMk.       .xWMMMMMMMMMMMMMMMMWKXWMMMK;                                              
-                                           :KMMMWOdXMMMMMMMMMMMMMMMk.       .OMMMMMMMMMMMMMMMMMWWMMMWO'                                               
-                                            ,OWMMMWWMMMMMMMMMMMMMMNc         lNMMMMMMMMMMMMMMMMMMMMNd.                                                
-                                             .dNMMMMMMMMMMMMMMMMMXc          .xWMMMMMMMMMMMMMMMMMMK:                                                  
-                                               :0MMMMMMMMMMMMMMMNl            ,KMMMMMMMMMMMMMMMMWk'                                                   
-                                                .xNMMMMMMMMMMMMM0'            .OMMMMMMMMMMMMMMMXl.                                                    
-                                                  :KMMMMMMMMMMMMO'            '0MMMMMMMMMMMMMNk'                                                      
-                                                   .dNMMMMMMMMMMK,            cNMMMMMMMMMMMW0:                                                        
-                                                     ;OWMMMMMMMMWl           '0MMMMMMMMMMMXo.                                                         
-                                                      .:0WMMMMMMM0'         .dWMMMMMMMMMNd'                                                           
-                                                        .c0WMMMMMWl         ;XMMMMMMMMXd'                                                             
-                                                          .cONMMMMO.       .dMMMMMMNkc.                                                               
-                                                             ,oOXWK,      .,kMWNKkl'                                                                  
-                                                                .,,.       .,c;'.                                                                     
-
-                                                                     
+<pre class="hero-eagle">
+                                            ...',;:cllooodddxdxxxxxxxxxxxxxxxdddollc:;,'...                                        
+                                        .',:codxO0KX8@#####################################@@8XK0Oxol:,..                                        
+                                     ..;ldk0X8@##########################################################@X0koc,.                                    
+                                  'cx08@########################################################################8Kx:.                                 
+                               'oO8################################################################################@@Xd,                               
+                             'x8######################################################################################8x'                             
+                           .cX##########################################################################################K:                            
+                          .d8############################################################################################Xc                           
+                         .d@##############################################################################################K;                          
+                         o8################################################################################################O.                         
+                        ;X################################################################################################@l                         
+                       .x##################################################################################################k.                        
+                       :X##################################################################################################X;                        
+                      .d##########################################################@@8888@@########################@l                        
+                      '0################@XK000KKX@@########################################8Kkdlc:,'''''',:cokX@##########x.                        
+                      :8#########@XOoc;'.........';:lok08@##############################@XOo:'.                .:k8#######0'                        
+                      o########8Oc'.,coddddlc;..        .';oOX@######################Xx:.        .,:odkO00OOkdo:,..,k@####X;                        
+                     .k######@0:.,dK@#####@XX88X0ko:'.        .cO8################Ko.        .:x0KOdocc::oK####@Kkol0@####@c                        
+                     ,K#####@x;cO8#########8kl;,,:lxOK0x:.        ;O@############@x.       .;xXXkc'...,:ld0@########@@######o                        
+                     c8#####8O@###########@Kxc,. ..:xKKx,       .x@############@x.      .cO8Xd,.'cx0X@######################x.                       
+                     d#######################@0x:.  .:x0x,      ,K#############@c     .lK80l'.:k8##########################O.                       
+                    .O###########################Xkc.  'lkx:.  ,K#############@k,':dX8k:.'oK@############################K,                       
+                    ,K##############################Xx,  .:k0kd0@#############@88@8x,.'dX################################8:                       
+                    :8################################8x'   ;O@##################8x,.,x8##################################@c                       
+                    o@##################################Xl.  .lX##################K:.,x8####################################o                       
+                   .x####################################8d.   :K###############0,'x8###########@X0OkkkkO0KX@##############x.                       
+                   .k##############@KOdlc::;:::cldk08@######@d.   :X##############0o0########@Kxl:,..        ..';cd0@##########k.                       
+                   .O#########8Ol,.                ..:o08####X:   .x######################8Ol,.                  .;x8##########O.                       
+                   .O#########8x,                     .,dX###x.   c8####################8x,                     ,x8##########O'                       
+                   '0#####@Kko'                           ,0##0'   ,K##################X:                           'lkX@######0'                       
+                   '0#####@O,                              .;0##K;   '0##################8Oo:'....    .......'',;:cclodddxkK@######0'                       
+                   '0#####@o        .....''',,,;;:::cclodkK@####X;   .O######################@XK0000O000KKKXX8@@###############0'                       
+                   .k#####0:';codk0KKXX88@@@@@################X;   .O########################################################O.                       
+                    d#####XKX@################################0'   .O########################################################k.                       
+                    c@########################################k.   .k########################################################x.                       
+                    '0########################################d    .k######################################################@o                       
+                     o@######################################8:    .k######################################################X;                       
+                     .O######################################O.    .k######################################################x.                       
+                      ;X####################################@l     .O####################################################K;                        
+                       :K###################################k.     '0####################################################X:                        
+                      ..;0@################################0,      ,K####################################################0;                         
+                      ,Ok,.oX############################8x'        ;X##################################################8k,                          
+                      .k#Xc..lk8#######################8kl'         c@###############8kdO8############################@KdoOo.                          
+                       :X#8l   .:oxOKXXXXXXXKK0OOkOX88x'      .      d################@KkxdO@#######@8@@@@#########@@@8K0xl;.;0#k.                          
+                        d@#8l  .c.  .,oxkkOOOOOO00K8#k.    :O0l.   'O####################Xx0######@Kdlc::::::;;,,'.''   ;K##d                          
+                        .k##8c ,K0;  '0##############k.   :8##0'   :8#####################88######@XK0OOOkx:    ,Ok. ;K##K,                          
+                         ,K##X:.x#K;  :K#############8l  .k###x.  .x######################################K;  .lX#k.,K##@o                            
+                          :X##X::K#K;  ,k@############8k:oX##8:   ,K######################################0;  .d8#8c,0##@k.                            
+                           lN##XllX#0,  .:O8############@@###Xc   l@####################################8d.  .k@#@d:O###0,                             
+                           .d@##8dlK#0,    ,dK@#############@Xk, o####################################8x,   ,0@#8d;O###K;                              
+                            .x@##8xc0#K:     .:d08############@d .xX@##############@Xxclk8###############@Xx,    cX##Xl,k@##Xc                              
+                             .k@##@x;x88d.      .,cdOK8@#####@Xd.   .:oxO0K00kl.    ;O@##############8Kxc.    .x8#@O,'k@##8c                               
+                              .k@##@k,:0@Kl.          .',:ccc:;.        .;c,.         .cOX888KOxo:'.      .:0@@Kl..k@##8l                                
+                               .O####@O'.lX@Kd;.                      .l08@O,.            .''..          ;O@#Xd. .k@##Xc                                 
+                                'O######0, .dX#@Kxc,.                 ,0@####X0o.                      'cO8#Xx'  'O@##X:                                  
+                                 'O######K;  'dX####@Kxl:'.          .oX########@O,                .,cdO8###@Kd'.:K####K;                                   
+                                  'O######K;   .l0@#####@8KOxoc:;;;cdK@@XXXXKKKKKKk;      ..';coxOX@##########8l.o8####0,                                  
+                                   'O######X:    .:O8#################8K0OkxdddddddodxkO0KX@################Xc'x@###@k.                                   
+                                    'O@#####Xl      ,xX@###################################################K:;0@###8d.                                    
+                                     .k@####8o.      .cdOX@##############################################@O;cX####Xl.                                     
+                                      .d8####@x.    d8K0K88888@@#######################################@k:d8####K;                                      
+                                       .o8####@x.   d#####@8XXKK0kdllllllllcccclkX####################8xcO@####@O'                                        
+                                         l8####@x.  o##########@80d,            .o8##################8xdK####8d.                                        
+                                          l8####@x. c###############8c          .d8#################Xkk8####Xl.                                         
+                                           l8####@k.:8###############k.        .x@################@KX@####K;                                          
+                                            :K####@OdX###############k.        .O#################@@####@O'                                           
+                                             ,O@####@@###############8c         l8######################8d.                                           
+                                              .d8###################Xc          .x@####################K:                                            
+                                                :0##################8l             ,K##################@k'                                             
+                                                 .x8#################0'             .O###############Xl.                                              
+                                                   :K################O'             '0#############8k'                                                
+                                                    .d8##############K,             c8###########@0:                                                 
+                                                      ;O@############@l            '0###########Xo.                                                  
+                                                       .:0@##########0'          .d@##########8d'                                                    
+                                                         .c0@########@l         ;X##########Xd'                                                      
+                                                           .cO8######O.        .d##########kc.                                                       
+                                                               ,oOX@K,       .,k#@8Kkl'                                                          
+                                                                  .,,.        .,c;'.                                                              
 </pre>
         </div>
         
