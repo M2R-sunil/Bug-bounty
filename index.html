@@ -23,7 +23,7 @@
             top: 0;
             left: 0;
             z-index: -1;
-            opacity: 0.3; /* Dimmed to ensure text remains visible */
+            opacity: 0.3; /* Thoda dim rakha hai taaki text visible rahe */
         }
 
         /* Custom Scrollbar */
@@ -132,6 +132,15 @@
             background: #00ff00;
             color: #000;
         }
+
+        /* Fade-in Animation for smooth transition */
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col p-4 md:p-8">
@@ -142,14 +151,68 @@
     <!-- CRT Scanline Effect -->
     <div class="scanlines"></div>
 
-    <!-- Main Container -->
-    <main class="max-w-4xl mx-auto w-full z-10 relative">
+    <!-- Splash Screen / Intro Page -->
+    <div id="splash-screen" class="min-h-screen flex flex-col items-center justify-center z-20 relative p-4 text-center w-full max-w-4xl mx-auto">
+        <div id="boot-text" class="text-sm md:text-base opacity-80 mb-2 h-32 w-full text-left overflow-hidden font-mono">
+            <!-- JS will inject boot sequence here -->
+        </div>
+        
+        <div id="intro-action" class="hidden flex flex-col items-center w-full">
+            <!-- Hacker Mask Vector SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-48 h-48 md:w-64 md:h-64 mb-6 drop-shadow-[0_0_15px_rgba(0,255,0,0.8)] fill-current text-green-500">
+                <!-- Left Eyebrow -->
+                <path d="M 10,40 C 30,10 70,10 90,40 C 60,20 30,30 15,50 Z" />
+                <!-- Right Eyebrow -->
+                <path d="M 190,40 C 170,10 130,10 110,40 C 140,20 170,30 185,50 Z" />
+                <!-- Left Eye wing out -->
+                <path d="M 5,60 L 25,60 L 15,70 Z" />
+                <!-- Left Eye -->
+                <path d="M 30,60 C 50,50 70,50 85,60 C 70,70 50,70 30,60 Z" />
+                <!-- Right Eye wing out -->
+                <path d="M 195,60 L 175,60 L 185,70 Z" />
+                <!-- Right Eye -->
+                <path d="M 170,60 C 150,50 130,50 115,60 C 130,70 150,70 170,60 Z" />
+                <!-- Nose Lines -->
+                <path d="M 85,80 C 80,100 70,110 65,110 C 80,115 90,100 95,120 C 100,125 105,120 110,110 C 120,115 130,100 135,110 C 130,110 120,100 115,80 Z" />
+                <!-- Small mustache triangle -->
+                <polygon points="95,130 105,130 100,120" />
+                <!-- Main Mustache -->
+                <path d="M 30,120 C 60,160 90,140 100,140 C 110,140 140,160 170,120 C 140,145 110,135 100,135 C 90,135 60,145 30,120 Z" />
+                <!-- Cheek Lines -->
+                <path d="M 15,100 C 30,160 60,180 80,170 C 50,160 30,130 25,110 Z" />
+                <path d="M 185,100 C 170,160 140,180 120,170 C 150,160 170,130 175,110 Z" />
+                <!-- Goatee -->
+                <path d="M 90,160 L 110,160 C 110,180 105,200 100,200 C 95,200 90,180 90,160 Z" />
+            </svg>
+            
+            <h1 class="text-3xl md:text-5xl font-bold glitch mb-4" style="color: #ff3333;" data-text="ACCESS GRANTED">ACCESS GRANTED</h1>
+            
+            <!-- Professional Content block -->
+            <div class="max-w-2xl bg-black/70 p-6 border border-green-500/50 rounded-md mb-8 shadow-[0_0_15px_rgba(0,255,0,0.2)]">
+                <p class="text-base md:text-lg text-green-400 font-mono text-left">
+                    <span class="text-gray-400"># System Analysis... Complete.</span><br><br>
+                    Welcome to my digital workspace. Main ek independent Security Researcher hoon aur mera primary objective aapke web applications, APIs, aur networks mein hidden aur critical vulnerabilities ko find karna hai. 
+                    <br><br>
+                    Main real-world cyber attacks simulate karta hoon taaki malicious threat actors se pehle main aapke infrastructure ke weak points ko expose aur secure kar sakun. I don't just run automated scanners; I dig deep into the architecture to protect your digital assets.
+                </p>
+            </div>
+
+            <!-- View Portfolio Button -->
+            <button onclick="enterPortfolio()" class="group relative px-6 py-3 font-bold text-black bg-green-500 border border-green-500 hover:bg-black hover:text-green-500 transition-all duration-300 shadow-[0_0_20px_rgba(0,255,0,0.4)] hover:shadow-[0_0_30px_rgba(0,255,0,0.8)] rounded-sm">
+                <span class="relative flex items-center gap-2">
+                    <span class="text-red-800 group-hover:text-red-500 font-mono">root@local:~$</span> 
+                    <span class="font-mono">./view_my_portfolio.sh</span> 
+                    <span class="cursor"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container (Hidden initially until user clicks the button) -->
+    <main id="main-portfolio" class="max-w-4xl mx-auto w-full z-10 relative hidden pb-10">
         
         <!-- Header / Boot Sequence -->
-        <header class="mb-10">
-            <div id="boot-text" class="text-sm md:text-base opacity-80 mb-4 h-24 overflow-hidden">
-                <!-- JS will inject boot sequence here -->
-            </div>
+        <header class="mb-10 pt-8">
             <h1 class="text-4xl md:text-6xl font-bold glitch mb-2" data-text="> HACKER_PORTFOLIO">> HACKER_PORTFOLIO</h1>
             <p class="text-xl md:text-2xl text-green-400">Security Researcher | Bug Bounty Hunter</p>
         </header>
@@ -174,8 +237,8 @@
                 <div class="space-y-4">
                     <p>
                         <span class="text-gray-400"># System Access Granted...</span><br>
-                        Hello World. I am a passionate Information Security Researcher and Bug Bounty Hunter. 
-                        My primary focus is on discovering critical vulnerabilities in web applications, APIs, and networks before malicious actors can exploit them.
+                        Hello World. Main ek passionate Information Security Researcher aur Bug Bounty Hunter hoon. 
+                        Mera focus web applications, APIs, aur networks mein critical vulnerabilities find karna hai isse pehle ki koi malicious actor unhe exploit kare.
                     </p>
                     <p>
                         "I don't just find bugs; I understand the architecture to secure it from the core."
@@ -250,8 +313,8 @@
                 <div class="bg-black/50 p-4 border-l-4 border-yellow-500 mb-6">
                     <h3 class="text-yellow-500 font-bold text-lg mb-2">ATTENTION: Security Teams & Triage</h3>
                     <p class="text-sm">
-                        If your company is running a private bug bounty program, you need deep-dive researchers, not just automated scanners.
-                        I focus heavily on manual testing and chaining exploits to demonstrate real impact. <br>
+                        Agar aapki company ek private bug bounty program run kar rahi hai, toh you need deep-dive researchers, not just automated scanners.
+                        Main manual testing aur chained exploits par focus karta hoon. <br>
                         <span class="font-bold text-green-400 mt-2 block">=> Need impactful reports with clear remediation? Invite me to your private program.</span>
                     </p>
                 </div>
@@ -283,7 +346,7 @@
                     <span>./ping_me.sh</span>
                 </div>
                 
-                <p class="mb-4">Let's connect for collaborations or Private Program invitations:</p>
+                <p class="mb-4">Collaboration ya Private Program invites ke liye connect karein:</p>
                 
                 <div class="space-y-2 mb-6">
                     <p><span class="text-gray-500">Email:</span> <a href="mailto:your.email@example.com" class="text-green-400 hover:underline">hacker@bugbounty.com</a></p>
@@ -294,7 +357,7 @@
 
                 <div class="bg-black p-4 flex items-center">
                     <span class="text-green-500 mr-2">root@local:~/contact$</span>
-                    <input type="text" placeholder="Type your message here..." class="bg-transparent border-none outline-none text-green-500 w-full font-mono placeholder-green-800" readonly onclick="alert('You can integrate a working form here with a backend API like Formspree.')">
+                    <input type="text" placeholder="Type your message here..." class="bg-transparent border-none outline-none text-green-500 w-full font-mono placeholder-green-800" readonly onclick="alert('Isme aap ek working form add kar sakte hain backend API (jaise Formspree) ke saath.')">
                     <span class="cursor"></span>
                 </div>
             </section>
@@ -349,7 +412,7 @@
             canvas.height = window.innerHeight;
         });
 
-        // Boot Sequence Typing Effect
+        // Boot Sequence Typing Effect - Intro Page
         const bootLines = [
             "[OK] Started Show Plymouth Boot Screen.",
             "[OK] Reached target Paths.",
@@ -363,6 +426,7 @@
         ];
         
         const bootContainer = document.getElementById('boot-text');
+        const introAction = document.getElementById('intro-action');
         let currentLine = 0;
 
         function typeBootSequence() {
@@ -377,8 +441,29 @@
                 bootContainer.appendChild(p);
                 bootContainer.scrollTop = bootContainer.scrollHeight;
                 currentLine++;
-                setTimeout(typeBootSequence, Math.random() * 200 + 100);
+                setTimeout(typeBootSequence, Math.random() * 150 + 50); // Fast typing
+            } else {
+                // Intro mask & button ko show karo boot khatam hone ke baad
+                setTimeout(() => {
+                    introAction.classList.remove('hidden');
+                    introAction.classList.add('fade-in');
+                }, 400);
             }
+        }
+
+        // Yeh function button click pe chalega aur portfolio reveal karega
+        function enterPortfolio() {
+            const splash = document.getElementById('splash-screen');
+            const main = document.getElementById('main-portfolio');
+            
+            // Intro hide karo
+            splash.style.display = 'none';
+            
+            // Main portfolio dikhao with fade in
+            main.classList.remove('hidden');
+            main.classList.add('fade-in');
+            
+            window.scrollTo(0, 0);
         }
 
         // Start boot sequence on load
