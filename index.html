@@ -3,199 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Portfolio</title>
+    <title>[root@portfolio ~]#</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset aur Basic Setup */
-        * {
-            box-sizing: border-box;
-        }
-        
+        /* Custom Hacker Styles */
         body {
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Courier New', Courier, monospace;
             margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow-x: hidden;
+            background-color: #050505;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
         }
 
-        .container {
-            max-width: 900px;
+        /* Matrix Background */
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3; /* Thoda dim rakha hai taaki text visible rahe */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #001100; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00ff00; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00cc00; 
+        }
+
+        /* Terminal Window Effect */
+        .terminal-box {
+            background: rgba(0, 20, 0, 0.8);
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Blinking Cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #00ff00;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            color: #00ff00;
+            font-weight: bold;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(15, 25, 20, 0.8);
-            border: 1px solid rgba(0, 255, 204, 0.2);
-            border-radius: 12px;
-            padding: 40px 20px;
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.05);
-            text-align: center;
+            height: 100%;
+            background: #050505;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 blue;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
         }
 
-        /* Eagle Art Formatting */
-        .eagle-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 83px, 0); }
+            20% { clip: rect(62px, 9999px, 12px, 0); }
+            40% { clip: rect(34px, 9999px, 89px, 0); }
+            60% { clip: rect(78px, 9999px, 15px, 0); }
+            80% { clip: rect(45px, 9999px, 99px, 0); }
+            100% { clip: rect(23px, 9999px, 54px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            20% { clip: rect(12px, 9999px, 55px, 0); }
+            40% { clip: rect(88px, 9999px, 22px, 0); }
+            60% { clip: rect(34px, 9999px, 77px, 0); }
+            80% { clip: rect(9px, 9999px, 44px, 0); }
+            100% { clip: rect(55px, 9999px, 11px, 0); }
         }
 
-        pre.hero-eagle {
-            /* Default choti size PC ke liye */
-            font-size: 6.5px; 
-            line-height: 1.1; 
-            color: #00ffcc;
-            text-shadow: 0 0 5px rgba(0, 255, 204, 0.4);
-            font-weight: bold; 
-            white-space: pre; 
-            margin: 0;
+        /* Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 50;
         }
 
-        /* Typography */
-        h1 {
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #ffffff;
-            font-size: clamp(20px, 3vw, 28px);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .highlight {
-            color: #00ffcc;
-        }
-
-        p {
-            font-size: clamp(14px, 1.5vw, 16px);
-            line-height: 1.8;
-            color: #b3b3b3;
-            margin: 0 auto 20px auto;
-            max-width: 700px;
-        }
-
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px dashed rgba(0, 255, 204, 0.2);
-            font-size: 13px;
-            color: #555555;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Screen ke hisaab se ASCII aur chota karne ke liye */
-        @media (max-width: 800px) {
-            pre.hero-eagle { font-size: 5px; }
-        }
-        @media (max-width: 600px) {
-            pre.hero-eagle { font-size: 3.5px; }
-        }
-        @media (max-width: 450px) {
-            pre.hero-eagle { font-size: 2.5px; }
+        /* Text Select Color */
+        ::selection {
+            background: #00ff00;
+            color: #000;
         }
     </style>
 </head>
-<body>
+<body class="antialiased min-h-screen flex flex-col p-4 md:p-8">
 
-    <div class="container">
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrix"></canvas>
+
+    <!-- CRT Scanline Effect -->
+    <div class="scanlines"></div>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto w-full z-10 relative">
         
-        <div class="eagle-wrapper">
-<pre class="hero-eagle">
-                                            ...',;:cllooodddxdxxxxxxxxxxxxxxxdddollc:;,'...                                        
-                                        .',:codxO0KX8@#####################################@@8XK0Oxol:,..                                        
-                                     ..;ldk0X8@##########################################################@X0koc,.                                    
-                                  'cx08@########################################################################8Kx:.                                 
-                               'oO8################################################################################@@Xd,                               
-                             'x8######################################################################################8x'                             
-                           .cX##########################################################################################K:                            
-                          .d8############################################################################################Xc                           
-                         .d@##############################################################################################K;                          
-                         o8################################################################################################O.                         
-                        ;X################################################################################################@l                         
-                       .x##################################################################################################k.                        
-                       :X##################################################################################################X;                        
-                      .d##########################################################@@8888@@########################@l                        
-                      '0################@XK000KKX@@########################################8Kkdlc:,'''''',:cokX@##########x.                        
-                      :8#########@XOoc;'.........';:lok08@##############################@XOo:'.                .:k8#######0'                        
-                      o########8Oc'.,coddddlc;..        .';oOX@######################Xx:.        .,:odkO00OOkdo:,..,k@####X;                        
-                     .k######@0:.,dK@#####@XX88X0ko:'.        .cO8################Ko.        .:x0KOdocc::oK####@Kkol0@####@c                        
-                     ,K#####@x;cO8#########8kl;,,:lxOK0x:.        ;O@############@x.       .;xXXkc'...,:ld0@########@@######o                        
-                     c8#####8O@###########@Kxc,. ..:xKKx,       .x@############@x.      .cO8Xd,.'cx0X@######################x.                       
-                     d#######################@0x:.  .:x0x,      ,K#############@c     .lK80l'.:k8##########################O.                       
-                    .O###########################Xkc.  'lkx:.  ,K#############@k,':dX8k:.'oK@############################K,                       
-                    ,K##############################Xx,  .:k0kd0@#############@88@8x,.'dX################################8:                       
-                    :8################################8x'   ;O@##################8x,.,x8##################################@c                       
-                    o@##################################Xl.  .lX##################K:.,x8####################################o                       
-                   .x####################################8d.   :K###############0,'x8###########@X0OkkkkO0KX@##############x.                       
-                   .k##############@KOdlc::;:::cldk08@######@d.   :X##############0o0########@Kxl:,..        ..';cd0@##########k.                       
-                   .O#########8Ol,.                ..:o08####X:   .x######################8Ol,.                  .;x8##########O.                       
-                   .O#########8x,                     .,dX###x.   c8####################8x,                     ,x8##########O'                       
-                   '0#####@Kko'                           ,0##0'   ,K##################X:                           'lkX@######0'                       
-                   '0#####@O,                              .;0##K;   '0##################8Oo:'....    .......'',;:cclodddxkK@######0'                       
-                   '0#####@o        .....''',,,;;:::cclodkK@####X;   .O######################@XK0000O000KKKXX8@@###############0'                       
-                   .k#####0:';codk0KKXX88@@@@@################X;   .O########################################################O.                       
-                    d#####XKX@################################0'   .O########################################################k.                       
-                    c@########################################k.   .k########################################################x.                       
-                    '0########################################d    .k######################################################@o                       
-                     o@######################################8:    .k######################################################X;                       
-                     .O######################################O.    .k######################################################x.                       
-                      ;X####################################@l     .O####################################################K;                        
-                       :K###################################k.     '0####################################################X:                        
-                      ..;0@################################0,      ,K####################################################0;                         
-                      ,Ok,.oX############################8x'        ;X##################################################8k,                          
-                      .k#Xc..lk8#######################8kl'         c@###############8kdO8############################@KdoOo.                          
-                       :X#8l   .:oxOKXXXXXXXKK0OOkOX88x'      .      d################@KkxdO@#######@8@@@@#########@@@8K0xl;.;0#k.                          
-                        d@#8l  .c.  .,oxkkOOOOOO00K8#k.    :O0l.   'O####################Xx0######@Kdlc::::::;;,,'.''   ;K##d                          
-                        .k##8c ,K0;  '0##############k.   :8##0'   :8#####################88######@XK0OOOkx:    ,Ok. ;K##K,                          
-                         ,K##X:.x#K;  :K#############8l  .k###x.  .x######################################K;  .lX#k.,K##@o                            
-                          :X##X::K#K;  ,k@############8k:oX##8:   ,K######################################0;  .d8#8c,0##@k.                            
-                           lN##XllX#0,  .:O8############@@###Xc   l@####################################8d.  .k@#@d:O###0,                             
-                           .d@##8dlK#0,    ,dK@#############@Xk, o####################################8x,   ,0@#8d;O###K;                              
-                            .x@##8xc0#K:     .:d08############@d .xX@##############@Xxclk8###############@Xx,    cX##Xl,k@##Xc                              
-                             .k@##@x;x88d.      .,cdOK8@#####@Xd.   .:oxO0K00kl.    ;O@##############8Kxc.    .x8#@O,'k@##8c                               
-                              .k@##@k,:0@Kl.          .',:ccc:;.        .;c,.         .cOX888KOxo:'.      .:0@@Kl..k@##8l                                
-                               .O####@O'.lX@Kd;.                      .l08@O,.            .''..          ;O@#Xd. .k@##Xc                                 
-                                'O######0, .dX#@Kxc,.                 ,0@####X0o.                      'cO8#Xx'  'O@##X:                                  
-                                 'O######K;  'dX####@Kxl:'.          .oX########@O,                .,cdO8###@Kd'.:K####K;                                   
-                                  'O######K;   .l0@#####@8KOxoc:;;;cdK@@XXXXKKKKKKk;      ..';coxOX@##########8l.o8####0,                                  
-                                   'O######X:    .:O8#################8K0OkxdddddddodxkO0KX@################Xc'x@###@k.                                   
-                                    'O@#####Xl      ,xX@###################################################K:;0@###8d.                                    
-                                     .k@####8o.      .cdOX@##############################################@O;cX####Xl.                                     
-                                      .d8####@x.    d8K0K88888@@#######################################@k:d8####K;                                      
-                                       .o8####@x.   d#####@8XXKK0kdllllllllcccclkX####################8xcO@####@O'                                        
-                                         l8####@x.  o##########@80d,            .o8##################8xdK####8d.                                        
-                                          l8####@x. c###############8c          .d8#################Xkk8####Xl.                                         
-                                           l8####@k.:8###############k.        .x@################@KX@####K;                                          
-                                            :K####@OdX###############k.        .O#################@@####@O'                                           
-                                             ,O@####@@###############8c         l8######################8d.                                           
-                                              .d8###################Xc          .x@####################K:                                            
-                                                :0##################8l             ,K##################@k'                                             
-                                                 .x8#################0'             .O###############Xl.                                              
-                                                   :K################O'             '0#############8k'                                                
-                                                    .d8##############K,             c8###########@0:                                                 
-                                                      ;O@############@l            '0###########Xo.                                                  
-                                                       .:0@##########0'          .d@##########8d'                                                    
-                                                         .c0@########@l         ;X##########Xd'                                                      
-                                                           .cO8######O.        .d##########kc.                                                       
-                                                               ,oOX@K,       .,k#@8Kkl'                                                          
-                                                                  .,,.        .,c;'.                                                              
-</pre>
+        <!-- Header / Boot Sequence -->
+        <header class="mb-10">
+            <div id="boot-text" class="text-sm md:text-base opacity-80 mb-4 h-24 overflow-hidden">
+                <!-- JS will inject boot sequence here -->
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold glitch mb-2" data-text="> HACKER_PORTFOLIO">> HACKER_PORTFOLIO</h1>
+            <p class="text-xl md:text-2xl text-green-400">Security Researcher | Bug Bounty Hunter</p>
+        </header>
+
+        <!-- Navigation (Terminal Tabs style) -->
+        <nav class="flex flex-wrap gap-4 mb-8 border-b border-green-500/50 pb-4">
+            <a href="#whoami" class="hover:bg-green-900 hover:text-white px-3 py-1 transition duration-300">[ ./whoami ]</a>
+            <a href="#skills" class="hover:bg-green-900 hover:text-white px-3 py-1 transition duration-300">[ cat skills.txt ]</a>
+            <a href="#bounties" class="hover:bg-green-900 hover:text-white px-3 py-1 transition duration-300">[ tail -f bounties.log ]</a>
+            <a href="#contact" class="hover:bg-green-900 hover:text-white px-3 py-1 transition duration-300">[ ping_me ]</a>
+        </nav>
+
+        <!-- Sections -->
+        <div class="space-y-12">
+
+            <!-- Whoami Section -->
+            <section id="whoami" class="terminal-box p-6 rounded-sm">
+                <div class="flex items-center border-b border-green-500/30 pb-2 mb-4">
+                    <span class="text-red-500 mr-2">root@local:~$</span>
+                    <span>./whoami</span>
+                </div>
+                <div class="space-y-4">
+                    <p>
+                        <span class="text-gray-400"># System Access Granted...</span><br>
+                        Hello World. Main ek passionate Information Security Researcher aur Bug Bounty Hunter hoon. 
+                        Mera focus web applications, APIs, aur networks mein critical vulnerabilities find karna hai isse pehle ki koi malicious actor unhe exploit kare.
+                    </p>
+                    <p>
+                        "I don't just find bugs; I understand the architecture to secure it from the core."
+                    </p>
+                    <p class="text-yellow-400">
+                        > STATUS: Actively hunting on public/private programs and open for new private invites.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="terminal-box p-6 rounded-sm">
+                <div class="flex items-center border-b border-green-500/30 pb-2 mb-4">
+                    <span class="text-red-500 mr-2">root@local:~$</span>
+                    <span>cat skills.txt</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Core Competencies -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-green-300">-- Core Competencies --</h3>
+                        <ul class="space-y-2">
+                            <li><span class="text-green-500">[+]</span> Web App Penetration Testing</li>
+                            <li><span class="text-green-500">[+]</span> API Security Testing (REST/GraphQL)</li>
+                            <li><span class="text-green-500">[+]</span> Network Vulnerability Assessment</li>
+                            <li><span class="text-green-500">[+]</span> Linux Privilege Escalation Master</li>
+                            <li><span class="text-green-500">[+]</span> Scripting & Automation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tech Stack / Languages -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-green-300">-- Weapons / Languages --</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm"><span>Python (Automation/Exploit Dev)</span><span>90%</span></div>
+                                <div class="w-full bg-gray-800 h-2 mt-1"><div class="bg-green-500 h-2" style="width: 90%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm"><span>Bash Scripting (Recon Automation)</span><span>95%</span></div>
+                                <div class="w-full bg-gray-800 h-2 mt-1"><div class="bg-green-500 h-2" style="width: 95%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm"><span>SQL (Injection Masterclass)</span><span>85%</span></div>
+                                <div class="w-full bg-gray-800 h-2 mt-1"><div class="bg-green-500 h-2" style="width: 85%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vulnerability Expertise -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold mb-4 text-green-300">-- Vulnerability Expertise (OWASP Top 10) --</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="border border-green-500 px-3 py-1 hover:bg-green-500 hover:text-black transition">XSS (Reflected/Stored/DOM)</span>
+                        <span class="border border-green-500 px-3 py-1 hover:bg-green-500 hover:text-black transition">CSRF / XSRF</span>
+                        <span class="border border-green-500 px-3 py-1 hover:bg-green-500 hover:text-black transition">SQLi / NoSQLi</span>
+                        <span class="border border-green-500 px-3 py-1 hover:bg-green-500 hover:text-black transition">IDOR / BOLA</span>
+                        <span class="border border-green-500 px-3 py-1 hover:bg-green-500 hover:text-black transition">SSRF</span>
+                        <span class="border border-green-500 px-3 py-1 hover:bg-green-500 hover:text-black transition">RCE</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bounties / Pitch Section -->
+            <section id="bounties" class="terminal-box p-6 rounded-sm">
+                <div class="flex items-center border-b border-green-500/30 pb-2 mb-4">
+                    <span class="text-red-500 mr-2">root@local:~$</span>
+                    <span>tail -f bounties.log</span>
+                </div>
+                
+                <div class="bg-black/50 p-4 border-l-4 border-yellow-500 mb-6">
+                    <h3 class="text-yellow-500 font-bold text-lg mb-2">ATTENTION: Security Teams & Triage</h3>
+                    <p class="text-sm">
+                        Agar aapki company ek private bug bounty program run kar rahi hai, toh you need deep-dive researchers, not just automated scanners.
+                        Main manual testing aur chained exploits par focus karta hoon. <br>
+                        <span class="font-bold text-green-400 mt-2 block">=> Need impactful reports with clear remediation? Invite me to your private program.</span>
+                    </p>
+                </div>
+
+                <div class="space-y-4 font-mono text-sm">
+                    <div class="flex justify-between border-b border-gray-800 pb-2 hover:bg-gray-900 p-2">
+                        <span>[2023-10] Critical RCE in E-commerce Platform</span>
+                        <span class="text-green-500">Bounty Rewarded $$$$</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-800 pb-2 hover:bg-gray-900 p-2">
+                        <span>[2023-08] Account Takeover via Chained XSS & CSRF</span>
+                        <span class="text-green-500">Acknowledged / Swag</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-800 pb-2 hover:bg-gray-900 p-2">
+                        <span>[2023-05] API Data Leak (IDOR) on FinTech App</span>
+                        <span class="text-green-500">Bounty Rewarded $$$</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-800 pb-2 hover:bg-gray-900 p-2 text-gray-500">
+                        <span>[2023-01] Multiple Hall of Fame Acknowledgements...</span>
+                        <span>[Redacted]</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="terminal-box p-6 rounded-sm mb-20">
+                <div class="flex items-center border-b border-green-500/30 pb-2 mb-4">
+                    <span class="text-red-500 mr-2">root@local:~$</span>
+                    <span>./ping_me.sh</span>
+                </div>
+                
+                <p class="mb-4">Collaboration ya Private Program invites ke liye connect karein:</p>
+                
+                <div class="space-y-2 mb-6">
+                    <p><span class="text-gray-500">Email:</span> <a href="mailto:your.email@example.com" class="text-green-400 hover:underline">hacker@bugbounty.com</a></p>
+                    <p><span class="text-gray-500">HackerOne:</span> <a href="#" class="text-green-400 hover:underline">hackerone.com/your_handle</a></p>
+                    <p><span class="text-gray-500">Twitter/X:</span> <a href="#" class="text-green-400 hover:underline">@your_handle</a></p>
+                    <p><span class="text-gray-500">LinkedIn:</span> <a href="#" class="text-green-400 hover:underline">linkedin.com/in/your_profile</a></p>
+                </div>
+
+                <div class="bg-black p-4 flex items-center">
+                    <span class="text-green-500 mr-2">root@local:~/contact$</span>
+                    <input type="text" placeholder="Type your message here..." class="bg-transparent border-none outline-none text-green-500 w-full font-mono placeholder-green-800" readonly onclick="alert('Isme aap ek working form add kar sakte hain backend API (jaise Formspree) ke saath.')">
+                    <span class="cursor"></span>
+                </div>
+            </section>
+
         </div>
+    </main>
+
+    <script>
+        // Matrix Rain Animation Script
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const characters = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        // Handle window resize for canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Boot Sequence Typing Effect
+        const bootLines = [
+            "[OK] Started Show Plymouth Boot Screen.",
+            "[OK] Reached target Paths.",
+            "[OK] Reached target Basic System.",
+            "Mounting /sys/kernel/debug...",
+            "Starting WPA supplicant...",
+            "[OK] Started WPA supplicant.",
+            "Loading Hacker_Portfolio_v2.0 modules...",
+            "Decrypting payload...",
+            "Access Granted. Welcome, Admin."
+        ];
         
-        <h1><span class="highlight">SysAdmin</span> & Security Researcher</h1>
-        <p>
-            I am a dedicated cybersecurity researcher and ethical hacker. My mission is to help organizations protect their infrastructure from data breaches and secure their critical assets against advanced persistent threats. I look at systems not just for how they work, but for how they can be broken—and more importantly, how they can be fortified.
-        </p>
-        <p>
-            I specialize in identifying vulnerabilities before malicious actors do. Every network has a weak link, and my primary objective is to find it, patch it, and elevate your overall security posture. Let's build unbreachable walls together.
-        </p>
+        const bootContainer = document.getElementById('boot-text');
+        let currentLine = 0;
 
-        <div class="footer">
-            <p>> Securing the cyberspace, one packet at a time_</p>
-        </div>
-    </div>
+        function typeBootSequence() {
+            if (currentLine < bootLines.length) {
+                const p = document.createElement('p');
+                p.textContent = bootLines[currentLine];
+                if(currentLine === bootLines.length - 1) {
+                    p.className = "text-green-400 font-bold";
+                } else if(Math.random() > 0.7) {
+                    p.className = "text-yellow-400"; // Random warnings
+                }
+                bootContainer.appendChild(p);
+                bootContainer.scrollTop = bootContainer.scrollHeight;
+                currentLine++;
+                setTimeout(typeBootSequence, Math.random() * 200 + 100);
+            }
+        }
 
+        // Start boot sequence on load
+        window.onload = typeBootSequence;
+
+    </script>
 </body>
 </html>
